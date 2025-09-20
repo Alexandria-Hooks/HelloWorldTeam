@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 /*  User Interface Class
  *
  *  to be used in Driver for welcome
- *  page, and game loop
+ *  page, and collect user input
  */
 public class UI extends JFrame {
     private JTextField level;
@@ -19,12 +19,11 @@ public class UI extends JFrame {
     }
 
     public UI(LevelListener listener){
-        setTitle("Anagrams");
+        setTitle("Anagrams - Menu");
         setSize(500,500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        panel = new JPanel();
-        panel.setLayout(new FlowLayout());
+        panel = new JPanel(new FlowLayout());
 
         levelPrompt = new JLabel("Welcome to Anagrams!"); // temporarily welcome msg
 
@@ -38,7 +37,10 @@ public class UI extends JFrame {
                 panel.removeAll();
                 if(firstClick){
                     // change temp welcome msg to level prompt
-                    levelPrompt.setText("<html>Enter Level: (1, 2, or 3).<br>1. Easy.<br>2. Medium.<br>3. Hard</html>");
+                    levelPrompt.setText("<html>Enter Level: (1, 2, 3, 4, or 5)<br>" +
+                            "Easy:<br>1. Caesar<br>2. Vigenere<br>" +
+                            "Mid:<br>3. Aristocrat<br>4. Rail Fence<br>" +
+                            "Hell:<br>5. Baconian</html>");
                     level = new JTextField(10); // to take user input
 
                     panel.add(levelPrompt);
@@ -48,8 +50,8 @@ public class UI extends JFrame {
                 } else {
                     // pass chosen level to Driver
                     String lvl = level.getText();   // user input
-                    listener.getLevel(lvl);
-                    // TODO: exit UI?
+                    listener.getLevel(lvl);         // return input
+                    dispose();                      // exit UI
                 }
                 // panel update
                 panel.revalidate();
