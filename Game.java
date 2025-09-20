@@ -14,9 +14,11 @@ public class Game extends JFrame {
     private int points;
     private JLabel currentAttempts;
     private int attempts;
+    private JLabel question;
     private JLabel prompt;
     private JTextField guess;
-    public Game(int level) {
+
+    public Game(int level) { // Constructor
         setTitle("Anagrams - Level " +  level);
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -46,6 +48,7 @@ public class Game extends JFrame {
         title = new JLabel(type + " Cipher");
         currentPoints = new JLabel("Points: " + points);
         currentAttempts = new JLabel("Attempts: " + attempts);
+        question = new JLabel("Get from Cipher Class"); // TODO: obtain encryption from Cipher Class
         prompt = new JLabel("Guess: ");
         guess = new JTextField(15);
 
@@ -54,7 +57,9 @@ public class Game extends JFrame {
         enter.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: take in user input and compare to correct answer
+                String guessed = guess.getText().toUpperCase(); // take in user input
+                System.out.println("Guessed: " + guessed);
+                // TODO: compare to correct answer
                 // TODO: figure out how many points earned if correct
                 attempts++; // add 1 attempt
             }
@@ -64,6 +69,7 @@ public class Game extends JFrame {
         panel.add(title);
         panel.add(currentPoints);
         panel.add(currentAttempts);
+        panel.add(question);
         panel.add(prompt);
         panel.add(guess);
         panel.add(enter);
