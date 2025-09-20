@@ -45,10 +45,11 @@ public class Driver {
     //Random Generator
     public static int keyGenerator (){
         Random rand = new Random();
-        int radnum = rand.nextInt(10);
+        int radnum = rand.nextInt(22);
         return radnum;
     
 }
+
 
 
 
