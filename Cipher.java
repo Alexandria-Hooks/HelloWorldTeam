@@ -1,5 +1,7 @@
 //comment
 public class Cipher {
+    public static String alph = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    
     public static String keyingAlphabet (String alph, int key) {
         String keyedAlph = "";
         
@@ -72,11 +74,11 @@ public class Cipher {
 
                 if(encrypt){
                     result1 = (lol + what) % 26; //encryption 
-                }else{
+                } else{
                     result1 = (lol - waht + 26) % 26; //decryption 
             }
                 result.append(alph.CharAt(result1));
-            }else{
+            } else{
                 result.append(a);
             } 
         }
