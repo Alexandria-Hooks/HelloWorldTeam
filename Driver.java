@@ -6,23 +6,8 @@ import java.util.ArrayList;
 public class Driver {
     private static String level = "1";
     public static void main(String[] args) {
-       String path = "/Users/alexandriahooks/Downloads/QuoteSheet.csv";
-       String line;
-       ArrayList<String> quotes = new ArrayList<>();
-       try {
-           BufferedReader br = new BufferedReader(new FileReader(path));
-           while ((line = br.readLine()) != null){
-           quotes.add(line);
-           }
-
-
-       }
-           catch (FileNotFoundException e){
-               e.printStackTrace();
-           }
-          catch (IOException e){
-           e.printStackTrace();
-       }
+     ArrayList<String> quotes = lists("/Users/alexandriahooks/Downloads/QuoteSheet.csv"); //initialize quote list
+     ArrayList<String> keywords = lists("/Users/alexandriahooks/Downloads/Keywords - Sheet1.csv"); //inititalize keyword list
 
         // Create UI and obtain user chosen level
         UI ui = new UI(level1 -> {
@@ -36,6 +21,27 @@ public class Driver {
             }
         });
     }
+    public static ArrayList<String> lists (String path){
+        String line;
+        ArrayList<String> listed = new ArrayList<>();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(path));
+            while ((line = br.readLine()) != null){
+                listed.add(line);
+            }
+
+
+        }
+        catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        return listed;
+    }
+    
 }
+
 
 
