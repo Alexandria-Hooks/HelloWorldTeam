@@ -84,7 +84,7 @@ public class Cipher {
     public static String VigenereCipher(String message, String key, boolean encrypt){
         StringBuilder result = new StringBuilder();
 
-        //to match message length
+        //to match message length. Extends key tom match lenght of message
         StringBuilder actualKey = new StringBuilder();
         char a;
         for(int i = 0; i < message.length(); i++){
@@ -92,7 +92,7 @@ public class Cipher {
 
             actualKey.append(a);
         }
-        //process message 
+        //process each character message 
         char ch;
         int chIndex;
         int actualIndex;
@@ -100,8 +100,8 @@ public class Cipher {
         for (int i = 0; i < message.length(); i++){
             ch = message.charAt(i);
             if(alph.indexOf(ch) != -1){ //encrypt letters
-                chIndex = alph.indexOf(ch);
-                actualIndex = alph.indexOf(actualKey.charAt(i));
+                chIndex = alph.indexOf(ch); //index of message letter
+                actualIndex = alph.indexOf(actualKey.charAt(i)); //index of key letter
 
                 if(encrypt){
                     result1 = (chIndex + actualIndex) % 26; //encryption
@@ -110,10 +110,10 @@ public class Cipher {
             }
                 result.append(alph.charAt(result1));
             } else{
-                result.append(ch);
+                result.append(ch); // leave non alpahbetical characters unchanged
             } 
         }
-        return result.toString();
+        return result.toString(); //return final thing
         
     }
     
