@@ -1,21 +1,16 @@
-
-
-
-import java.util.Scanner;
 public class Driver {
+    private static String level = "1";
     public static void main(String[] args) {
-        // Initialize scanner and variables
-        Scanner in = new Scanner(System.in);
-        String level = "";                          // difficulty level user will attempt
-        int points = 0;                             // user points, goes down with number of failed attempts
+        // Create UI and obtain user chosen level
+        UI ui = new UI(level1 -> {
+            level = level1;
 
-        // Welcome text
-        System.out.println("Welcome to Anagrams!");
-        do { 
-            System.out.println("Please choose your level: (1, 2, or 3)");
-            System.out.println("1. Easy\n2. Medium\n3. Hard");
-            level = in.nextLine();
-        } while (!(level.equals("1") || level.equals("2") || level.equals("3")));  // keep going until user inputs correct level
+            // check input
+            if (!(level.equals("1") || level.equals("2") || level.equals("3"))) {
+                System.out.println("How are you going to do cryptography if you can't even read?");
+            }
+
+            // TODO: game loop
+        });
     }
-
 }
