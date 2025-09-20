@@ -110,7 +110,7 @@ public class Cipher {
             }
                 result.append(alph.charAt(result1));
             } else{
-                result.append(ch); // leave non alpahbetical characters unchanged
+                result.append(ch); // leave non alphabetical characters unchanged
             } 
         }
         return result.toString(); //return final thing
