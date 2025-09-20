@@ -1,16 +1,18 @@
+
 public class Cipher {
-    public static String CaesarCipher (String msg, int key) {
-        String encrypt = "";
-        String alph = "abcdefghijklmnopqrstuvwxyz";
+    public static String keyingAlphabet (String alph, int key) {
         String keyedAlph = "";
         
-        //creates the keyed alphabet
         keyedAlph = alph.substring(key-1, alph.length());
         keyedAlph += alph.substring(0, key-1);
         
-        /*System.out.println(alph);
-        System.out.println(keyedAlph);
-        System.out.println(keyedAlph.length());*/
+        return keyedAlph;
+    }
+    
+    public static String CaesarCipher (String msg, int key) {
+        String encrypt = "";
+        String alph = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String keyedAlph = keyingAlphabet(alph, key);
         
         //encrypting the string
         for (int i = 0; i < msg.length(); i++) {
@@ -20,6 +22,12 @@ public class Cipher {
         }
         
         //System.out.println(encrypt);
+        return encrypt;
+    }
+    
+    public static String Aristocrat (String msg, String keyw, int key) {
+        String encrypt = "";
+        
         return encrypt;
     }
     
