@@ -29,8 +29,7 @@ public class Cipher {
 
     //untested hashtag i do not want to do this
     public static String Aristocrat (String msg, String keyw, int key) {
-        String encrypt = "";
-        
+        String encrypt = ""; 
         String aristAlph = keyw;    //alphabet with the key starting it
         String[] uniqChars = new String[keyw.length()]; //uniq chars in keyword
         String temp = alph.substring(keyw.length()-1, 26);
@@ -53,6 +52,35 @@ public class Cipher {
         //System.out.println(encrypt);
         return encrypt;
     }
+
+    public static String XenocryptCipher (String msg, String keyw, int key) {
+        String encrypt = "";
+        //spanish alphabete
+        String alph2 = "ABCDEFGHIJKLMÑOPQRSTUVWXYZ";
+  
+        String aristAlph = keyw;    //alphabet with the key starting it
+        String[] uniqChars = new String[keyw.length()]; //uniq chars in keyword
+        String temp = alph.substring(keyw.length()-1, 26);
+        for (int i = 0; i < uniqChars.length; i++) {
+            if (temp.indexOf(uniqChars[i]) != -1) {
+                temp = temp.replaceAll(uniqChars[i], "");
+            }
+        }
+        
+        aristAlph += temp;  //rest of it
+        String keyedAlph = keyingAlphabet(aristAlph, key);  //getting the keyed alphabet
+        
+        //encrypting the string
+        for (int i = 0; i < msg.length(); i++) {
+            char ch = msg.charAt(i);
+            int index = alph2.indexOf(ch);
+            encrypt += keyedAlph.charAt(index);
+        }
+        
+        //System.out.println(encrypt);
+        return encrypt;
+    }
+
 
      public static String VigenereCipher(String message, String key, boolean encrypt){
         String Alph = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
