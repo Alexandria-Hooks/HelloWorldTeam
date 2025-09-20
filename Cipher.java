@@ -1,4 +1,4 @@
-
+//comment
 public class Cipher {
     public static String keyingAlphabet (String alph, int key) {
         String keyedAlph = "";
