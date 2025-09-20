@@ -87,7 +87,7 @@ public class Cipher {
         StringBuilder answer = new StringBuilder();
 
         //to match message lenght 
-        StringBuilder ActulKeyBruh = new StringBuilder();
+        StringBuilder ActulKey = new StringBuilder();
         for(int i = 0; i < message.length(); i++){
             char a = key.charAt (i % key.length());
             ActaualKey.append(a);
