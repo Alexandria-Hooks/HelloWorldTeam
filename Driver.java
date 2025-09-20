@@ -21,6 +21,7 @@ public class Driver {
             }
         });
     }
+    //String lists - takes csv path & creates list 
     public static ArrayList<String> lists (String path){
         String line;
         ArrayList<String> listed = new ArrayList<>();
@@ -46,6 +47,7 @@ public class Driver {
         return radnum;
     
 }
+
 
 
 
