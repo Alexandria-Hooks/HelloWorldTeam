@@ -8,7 +8,7 @@ public class Driver {
     public static void main(String[] args) {
      ArrayList<String> quotes = lists("/Users/alexandriahooks/Downloads/QuoteSheet.csv"); //initialize quote list
      ArrayList<String> keywords = lists("/Users/alexandriahooks/Downloads/Keywords - Sheet1.csv"); //inititalize keyword list
-
+     int key = keyGenerator();
         // Create UI and obtain user chosen level
         UI ui = new UI(level1 -> {
             level = level1;
@@ -40,8 +40,13 @@ public class Driver {
         }
         return listed;
     }
+    public static int keyGenerator (){
+        Random rand = new Random();
+        int radnum = rand.nextInt(10);
+        return radnum;
     
 }
+
 
 
 
