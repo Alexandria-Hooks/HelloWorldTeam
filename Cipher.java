@@ -92,7 +92,7 @@ public class Cipher {
 
             actualKey.append(a);
         }
-        //process message (hopefully)
+        //process message 
         char ch;
         int chIndex;
         int actualIndex;
