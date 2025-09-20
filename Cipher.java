@@ -32,7 +32,7 @@ public class Cipher {
         String encrypt = ""; 
         String aristAlph = keyw;    //alphabet with the key starting it
         String[] uniqChars = new String[keyw.length()]; //uniq chars in keyword
-        String temp = alph.substring(keyw.length()-1, 26);
+        String temp = alph2.substring(keyw.length()-1, 26);
         for (int i = 0; i < uniqChars.length; i++) {
             if (temp.indexOf(uniqChars[i]) != -1) {
                 temp = temp.replaceAll(uniqChars[i], "");
