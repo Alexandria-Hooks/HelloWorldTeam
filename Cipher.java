@@ -51,6 +51,43 @@ public class Cipher {
         //System.out.println(encrypt);
         return encrypt;
     }
+
+     public static String VigenereCipher(String message, String key, boolean encrypt){
+        String Alph = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        StringBuilder answer = new StringBuilder();
+
+        //to match message lenght 
+        StringBuilder ActulKeyBruh = new StringBuilder();
+        for(int i = 0; i < message.length(); i++){
+            char a = key.charAt (i % key.length());
+            ActaualKeyBruh.append(a);
+        }
+        //process message (hopefully)
+        for (int i = 0; i < message.length(); i++){
+             char yey = message.ChartAt(i);
+            if(alph.indexOf(yey) != -1){ //encrypt letters
+                int lol = alph.indexOf(yey);
+                int what = alph.indexOf(ActaualKeyBruh.charAt(i));
+                int result1;
+
+                if(encrypt){
+                    result1 = (lol + what) % 26; //encryption 
+                }else{
+                    result1 = (lol - waht + 26) % 26; //decryption 
+            }
+                result.append(alph.CharAt(result1));
+            }else{
+                result.append(a);
+            } 
+        }
+        return result.toString();
+        
+    }
+
+
+
+
+    
     
     public static void main(String[] args) {
         
