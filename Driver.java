@@ -6,11 +6,11 @@ public class Driver {
             level = level1;
 
             // check input
-            if (!(level.equals("1") || level.equals("2") || level.equals("3"))) {
+            if (!(level.equals("1") || level.equals("2") || level.equals("3") || level.equals("4") || level.equals("5"))) {
                 System.out.println("How are you going to do cryptography if you can't even read?");
+            } else {
+                // TODO: game loop
             }
-
-            // TODO: game loop
         });
     }
 }
