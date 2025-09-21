@@ -44,7 +44,7 @@ public class UI extends JFrame {
                 if(firstClick){
                     // change temp welcome msg to level prompt
                     levelPrompt.setText("<html>Enter Level: (1, 2, 3, or 4)<br>" +
-                            "Easy:<br>1. Caesar<br>2. Vigenere<br>" +
+                            "Easy:<br>1. Caesar<br>2. Vigenère<br>" +
                             "Mid:<br>3. Aristocrat<br>" +
                             "Hell:<br>4. Xenocrypt</html>");
                     // customize
@@ -81,3 +81,4 @@ public class UI extends JFrame {
         });
     }*/
 }
+
