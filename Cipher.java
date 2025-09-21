@@ -1,130 +1,134 @@
-/comment
+/* Cipher Class
+*
+*  used to encrypt phrases
+*  via different ciphers
+*/
 public class Cipher {
     public static String alph = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     // Shifts alphabet by key to the left
     public static String keyingAlphabet(String alph, int key) {
-        String keyedAlph = "";
-        keyedAlph = alph.substring(key-1, alph.length());
-        keyedAlph += alph.substring(0, key-1);
-        return keyedAlph;
+        return alph.substring(key) + alph.substring(0, key);
     }
-
+    
     public static String CaesarCipher(String msg, int key) {
-        String encrypt = "";
+        StringBuilder encrypt = new StringBuilder();
         String keyedAlph = keyingAlphabet(alph, key);
-        msg = msg.toUpperCase();
+        
         //encrypting the string
+        char ch;    // current character
+        int index;  // index of current character
         for (int i = 0; i < msg.length(); i++) {
-            char ch = msg.charAt(i);
-            int index = alph.indexOf(ch);
-            if (index == -1) {continue;}
-            encrypt += keyedAlph.charAt(index);
+            ch = msg.charAt(i);
+            if (alph.contains(Character.toString(ch))) {
+                index = alph.indexOf(ch);
+                encrypt.append(keyedAlph.charAt(index));
+            } else { // in case of spaces and punctuation
+                encrypt.append(ch);
+            }
         }
 
-        return encrypt;
+        return encrypt.toString();
     }
 
-    //aristocrat
-    public static String Aristocrat (String msg, String keyw, int key) {
-        String encrypt = "";
+    public static String Aristocrat(String msg, String keyw, int key) {
+        StringBuilder encrypt = new StringBuilder();
 
-        String aristAlph = keyw;    //alphabet with the key starting it
+        String aristAlph = keyw;    // alphabet with the key starting it
         String[] uniqChars = new String[keyw.length()]; //uniq chars in keyword
+        String ch;
         for (int i = 0; i < keyw.length(); i++) {
-            String ch = keyw.substring(i, i+1);
+            ch = keyw.substring(i, i + 1);
             uniqChars[i] = ch;
         }
         String temp = alph;
-        for (int i = 0; i < uniqChars.length; i++) {
-            if (temp.indexOf(uniqChars[i]) != -1) {
-                temp = temp.replaceAll(uniqChars[i], "");
+        for (String uniqChar : uniqChars) {
+            if (temp.contains(uniqChar)) {
+                temp = temp.replaceAll(uniqChar, "");
             }
         }
 
-        aristAlph += temp;  //rest of it
-        String keyedAlph = keyingAlphabet(aristAlph, key);  //getting the keyed alphabet
-        System.out.println(keyedAlph);
-        String t = msg.toUpperCase();
+        aristAlph += temp;  // rest of it
+        String keyedAlph = keyingAlphabet(aristAlph, key);  // get keyed alphabet
+
         //encrypting the string
-        for (int i = 0; i < t.length(); i++) {
-            char ch = t.charAt(i);
-            //System.out.println(ch);
-            int index = alph.indexOf(ch);
-            if (index == -1) {continue;}
-            encrypt += keyedAlph.charAt(index);
+        char c;
+        int index;
+        for (int i = 0; i < msg.length(); i++) {
+            c = msg.charAt(i);
+            if (alph.contains(Character.toString(c))) {
+                index = alph.indexOf(c);
+                encrypt.append(keyedAlph.charAt(index));
+            } else { // for spaces and punctuation
+                encrypt.append(c);
+            }
         }
 
-        //System.out.println(encrypt);
-        return encrypt;
+        return encrypt.toString();
     }
 
-
-    public static String XenocryptCipher(String msg, String keyw, int key) {
-        String alph2 = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
-        String encrypt = "";
+    public static String XenocryptCipher(String msg, String keyw, int key) { // TODO: FIX
+        StringBuilder encrypt = new StringBuilder();
+        String spanishAlph = "ABCDEFGHIJKLMÑOPQRSTUVWXYZ";
         String aristAlph = keyw;    //alphabet with the key starting it
         String[] uniqChars = new String[keyw.length()]; //uniq chars in keyword
-        //String temp = alph2.substring(keyw.length()-1, 26);
-        String temp = alph2;
-        for (int i = 0; i < uniqChars.length; i++) {
-            if (temp.indexOf(uniqChars[i]) != -1) {
-                temp = temp.replaceAll(uniqChars[i], "");
+        String temp = spanishAlph.substring(keyw.length()-1, 26);
+        for (String uniqChar : uniqChars) {
+            if (temp.contains(uniqChar)) {
+                temp = temp.replaceAll(uniqChar, "");
+            }
+        }
+        
+        aristAlph += temp;  // rest of it
+        String keyedAlph = keyingAlphabet(aristAlph, key);  // get keyed alphabet
+        
+        // encrypting the string
+        char c;
+        int index;
+        for (int i = 0; i < msg.length(); i++) {
+            c = msg.charAt(i);
+            if (spanishAlph.contains(Character.toString(c))) {
+                index = spanishAlph.indexOf(c);
+                encrypt.append(keyedAlph.charAt(index));
+            } else {
+                encrypt.append(c);
             }
         }
 
-        aristAlph += temp;  //rest of it
-        String keyedAlph = keyingAlphabet(aristAlph, key);  //getting the keyed alphabet
-
-        String t = msg.toUpperCase();
-        //encrypting the string
-        for (int i = 0; i < t.length(); i++) {
-            char ch = t.charAt(i);
-            int index = alph2.indexOf(ch);
-            if (index == -1) {continue;}
-            encrypt += keyedAlph.charAt(index);
-        }
-
-        //System.out.println(encrypt);
-        return encrypt;
+        return encrypt.toString();
     }
 
-
-
-
-    public static String VigenereCipher(String message, String key, boolean encrypt){
+    public static String VigenereCipher(String msg, String keyw){
         StringBuilder result = new StringBuilder();
-        message = message.toUpperCase();
-        //to match message length. Extends key tom match lenght of message
+
+        // to match message length
         StringBuilder actualKey = new StringBuilder();
         char a;
-        for(int i = 0; i < message.length(); i++){
-            a = key.charAt(i % key.length());
-
+        for(int i = 0; i < msg.length(); i++){
+            a = keyw.charAt(i % keyw.length());
             actualKey.append(a);
         }
-        //process each character message
+
+        // process each character message
         char ch;
         int chIndex;
         int actualIndex;
         int result1;
-        for (int i = 0; i < message.length(); i++){
-            ch = message.charAt(i);
+        for (int i = 0; i < msg.length(); i++){
+            ch = msg.charAt(i);
             if(alph.indexOf(ch) != -1){ //encrypt letters
-                chIndex = alph.indexOf(ch); //index of message letter
-                actualIndex = alph.indexOf(actualKey.charAt(i)); //index of key letter
-                result1 = (chIndex + actualIndex) % 26; //encryption
-                if (result1 == -1) {continue;}
+                chIndex = alph.indexOf(ch);
+                actualIndex = alph.indexOf(actualKey.charAt(i));
+                result1 = (chIndex + actualIndex) % 26;
                 result.append(alph.charAt(result1));
-            } else{
-                result.append(ch); // leave non alphabetical characters unchanged
-            }
+            } else { // leave non-alphabetical characters unchanged
+                result.append(ch);
+            } 
         }
-        return result.toString(); //return final thing
-
+        return result.toString();
     }
-
-    public static void main(String[] args) {
-
+    
+    public static void main(String[] args) { // for debugging cipher
+        
     }
 }
