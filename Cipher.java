@@ -72,7 +72,7 @@ public class Cipher {
         String spanishAlph = "ABCDEFGHIJKLMÑOPQRSTUVWXYZ";
         String aristAlph = keyw;    //alphabet with the key starting it
         String[] uniqChars = new String[keyw.length()]; //uniq chars in keyword
-        String temp = spanishAlph.substring(keyw.length()-1, 26);
+        String temp = spanishAlph.substring(keyw.length()-1, 27);
         for (String uniqChar : uniqChars) {
             if (temp.contains(uniqChar)) {
                 temp = temp.replaceAll(uniqChar, "");
