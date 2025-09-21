@@ -17,13 +17,12 @@ public class Game extends JFrame {
     private JLabel title;
     private String encryption;      // phrase to be solved
     private JLabel currentPoints;
-    private double points;    // user's total points
+    private double points;          // user's total points
     private int max_points;         // total possible points from a question
     private JLabel currentAttempts;
     private int attempts = 0;
     private int correctAttempts = 0; // number of correct attempts
     private JLabel question;
-    private JLabel prompt;
     private JTextField guess;       // user guess
     ArrayList<String> quotes;       // phrases
     ArrayList<String> keywords;
@@ -37,19 +36,21 @@ public class Game extends JFrame {
         keywords = lists("C:\\Users\\secsa\\OneDrive\\Desktop\\Computer Science\\Purdue\\HelloWorld\\Keywords_Sheet1.csv");   // initialize keyword list
 
         setTitle("Anagrams - Level " +  level);
-        setSize(800, 600);
+        setSize(900, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         panel = new JPanel(new FlowLayout());
+        // customize
+        panel.setBackground(new Color(177, 156, 215)); // light purple
 
         // initialize parameters
         String type = "";
         max_points = 100; // max possible points
         encryption = "";
         String keyw;
-        if (level == 1) {
-            phrase = quotes.get(randomGenerator(25,21)); // spanish quotes
-            keyw = keywords.get(randomGenerator(25, 21)).toUpperCase();  // random spanish word
+        if (level == 1) { // for Xenocrypt Cipher
+            phrase = quotes.get(randomGenerator(25,21)).toUpperCase();  // spanish quotes
+            keyw = keywords.get(randomGenerator(25, 21)).toUpperCase(); // random spanish word
         } else {
             phrase = quotes.get(randomGenerator(20, 0)).toUpperCase();
             keyw = keywords.get(randomGenerator(20, 0)).toUpperCase();  // obtain random key word
@@ -88,11 +89,19 @@ public class Game extends JFrame {
         currentPoints = new JLabel("Points: " + points);
         currentAttempts = new JLabel("Attempts: " + attempts);
         question = new JLabel("<html>Encrypted message: " + encryption + "<br>It is encoded using key " + encryptionKey + ".</html>");
-        prompt = new JLabel("Guess: ");
-        guess = new JTextField(15);
+        guess = new JTextField(40);
+        // customize
+        title.setFont(new Font("SansSerif", Font.BOLD, 20));
+        currentPoints.setFont(new Font("SansSerif", Font.BOLD, 20));
+        currentAttempts.setFont(new Font("SansSerif", Font.BOLD, 20));
+        question.setFont(new Font("SansSerif", Font.BOLD, 15));
+        question.setBorder(BorderFactory.createLineBorder(Color.black, 2));
+        question.setHorizontalAlignment(JLabel.CENTER);
 
         // enter button
         JButton enter = new JButton("Enter");
+        // customize
+        enter.setFont(new Font("SansSerif", Font.BOLD, 20));
         enter.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -161,7 +170,6 @@ public class Game extends JFrame {
         panel.add(currentPoints);
         panel.add(currentAttempts);
         panel.add(question);
-        panel.add(prompt);
         panel.add(guess);
         panel.add(enter);
 
