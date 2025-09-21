@@ -91,7 +91,8 @@ public class Game extends JFrame {
                     // panel update
                     currentPoints.setText("Points: " + points);
                     question.setText("Decrypted message: " + phrase);
-
+                    panel.remove(enter);
+                    panel.remove(guess);
                     if (correctAttempts == 10) {
                         if (level == 4) {
                             // pop up msg
@@ -114,6 +115,7 @@ public class Game extends JFrame {
                                 new Game(level, "NEW PHRASE HERE"); // TODO: get a new phrase
                             }
                         });
+                        panel.add(next);
                     }
                 } else {
                     // pop up msg
@@ -156,10 +158,10 @@ public class Game extends JFrame {
             return inPoint;
         return inPoint * Math.pow(0.9, (inAttempts - 1));
     }
-
+/*
     public static void main(String[] args) { // for debugging Game UI
         new Game(3, "DOVE IS BIRD");
         //System.out.println(keyGenerator());
         //System.out.println(getScore(100, 2));
-    }
+    }*/
 }
