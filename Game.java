@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
+
 /* Game User Interface Class
 *
 *  used in Driver to complete
@@ -10,13 +12,14 @@ import java.awt.event.ActionListener;
 public class Game extends JFrame {
     private JPanel panel;
     private JLabel title;
+    private String encryption;      // phrase to be solved
     private JLabel currentPoints;
     private int points;
     private JLabel currentAttempts;
     private int attempts;
     private JLabel question;
     private JLabel prompt;
-    private JTextField guess;
+    private JTextField guess;       // user guess
 
     public Game(int level) { // Constructor
         setTitle("Anagrams - Level " +  level);
@@ -24,31 +27,39 @@ public class Game extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         panel = new JPanel(new FlowLayout());
+
         String type = "";
-        switch (level) {  // figure out which cipher
+        encryption = "";
+        int key = keyGenerator();
+        switch (level) {  // figure out which cipher and obtain encryption
             case 1: {
                 type = "Caesar";
+                encryption = Cipher.CaesarCipher("DOVE IS BIRD", key); // TODO: use real phrase
                 break;
             }
             case 2: {
                 type = "Vigenere";
+                encryption = Cipher.VigenereCipher("Dove", "", true); // TODO: use real phrase
                 break;
             }
             case 3: {
                 type = "Aristocrat";
+                encryption = Cipher.Aristocrat("Dove", "Dove", key); // TODO: use real phrase
                 break;
             }
             case 4: {
-                type = "Rail Fence";
+                type = "Porta";
+                // TODO: call Porta function from Cipher and assign to encryption
                 break;
             }
             default:
-                type = "Baconian";
+                type = "Xenocrypt";
+                encryption = Cipher.XenocryptCipher("Dove", "Dove", key); // TODO: use real phrase
         }
         title = new JLabel(type + " Cipher");
         currentPoints = new JLabel("Points: " + points);
         currentAttempts = new JLabel("Attempts: " + attempts);
-        question = new JLabel("Get from Cipher Class"); // TODO: obtain encryption from Cipher Class
+        question = new JLabel("<html>Encrypted message: " + encryption + "<br>It is encoded using TODO</html>"); // TODO: obtain encryption from Cipher Class
         prompt = new JLabel("Guess: ");
         guess = new JTextField(15);
 
@@ -57,11 +68,14 @@ public class Game extends JFrame {
         enter.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                attempts++; // add 1 attempt
                 String guessed = guess.getText().toUpperCase(); // take in user input
                 System.out.println("Guessed: " + guessed);
                 // TODO: compare to correct answer
+                if (guessed.equals(encryption)) {
+
+                }
                 // TODO: figure out how many points earned if correct
-                attempts++; // add 1 attempt
             }
         });
 
@@ -78,7 +92,13 @@ public class Game extends JFrame {
         setVisible(true);
     }
 
+    // Random Key Generator
+    public static int keyGenerator() {
+        return new Random().nextInt(10);
+    }
+
     public static void main(String[] args) { // for debugging Game UI
-        new Game(3);
+        new Game(1);
+        //System.out.println(keyGenerator());
     }
 }
