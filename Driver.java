@@ -1,3 +1,4 @@
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -6,10 +7,8 @@ import java.util.Random;
 
 public class Driver {
     private static String level = "1";
-    public static void main(String[] args) {
-        ArrayList<String> quotes = lists("YOUR PATH TO QuoteSheet.csv HERE");          // initialize quote list
-        ArrayList<String> keywords = lists("YOUR PATH TO Keywords_Sheet1.csv HERE");   // initialize keyword list
-        
+    public static void main(String[] args) {          // initialize quote list
+           // initialize keyword list
         // Create UI and obtain user chosen level
         new UI(level1 -> {
             level = level1;
@@ -18,7 +17,7 @@ public class Driver {
             if (!(level.equals("1") || level.equals("2") || level.equals("3") || level.equals("4") || level.equals("5"))) {
                 System.out.println("How are you going to do cryptography if you can't even read?");
             } else { // Game Loop
-                new Game(Integer.parseInt(level), "DOVE IS BIRD") { // TODO: change test case to phrase
+                new Game(Integer.parseInt(level)) {
                     // TODO: maybe add stuff later
                 };
             }
@@ -39,5 +38,32 @@ public class Driver {
         }
         return listed;
     }
-}
+    public static ArrayList<String> quotes = lists("YOUR PATH TO QuoteSheet.csv HERE");
+    public static int key = keyGenerator();
+    public static ArrayList<String> keywords = lists("YOUR PATH TO Keywords_Sheet1.csv HERE");
+    public static String questionGenerator () {
+        String encrypted = "";
+        String type = "";
+        String question = "The encrypted message is " + encrypted + ". It is encoded using a " + type + " cipher.";
+        switch (level){
+            case "1": 
+                type = "caesar";
+                encrypted = Cipher.CaesarCipher(quotes.get(key),key);
+            case "2": 
+                type = "vigenere";
+                encrypted = Cipher.VigenereCipher(quotes.get(key),keywords.get(key-4), true);
+                
+                
+                
+                
+        }
+        
+        return question;
+    }
 
+    //Random Generator
+    public static int keyGenerator() {
+        Random rand = new Random();
+        return rand.nextInt(10);
+    }
+}
