@@ -27,31 +27,40 @@ public class Cipher {
         return encrypt.toString();
     }
 
-    //untested hashtag i do not want to do this
-    public static String Aristocrat(String msg, String keyw, int key) {
-        String encrypt = ""; 
+    //aristocrat     
+    public static String Aristocrat (String msg, String keyw, int key) {
+        String encrypt = "";
+        
         String aristAlph = keyw;    //alphabet with the key starting it
         String[] uniqChars = new String[keyw.length()]; //uniq chars in keyword
-        String temp = alph.substring(keyw.length()-1, 26);
+        for (int i = 0; i < keyw.length(); i++) {
+            String ch = keyw.substring(i, i+1);
+            uniqChars[i] = ch;
+        }
+        String temp = alph;
         for (int i = 0; i < uniqChars.length; i++) {
-            if (temp.contains(uniqChars[i])) {
+            if (temp.indexOf(uniqChars[i]) != -1) {
                 temp = temp.replaceAll(uniqChars[i], "");
             }
         }
         
         aristAlph += temp;  //rest of it
         String keyedAlph = keyingAlphabet(aristAlph, key);  //getting the keyed alphabet
-        
+        System.out.println(keyedAlph);
+        String t = msg.toUpperCase();
         //encrypting the string
-        for (int i = 0; i < msg.length(); i++) {
-            char ch = msg.charAt(i);
+        for (int i = 0; i < t.length(); i++) {
+            char ch = t.charAt(i);
+            //System.out.println(ch);
             int index = alph.indexOf(ch);
+            if (index == -1) {continue;}
             encrypt += keyedAlph.charAt(index);
         }
         
         //System.out.println(encrypt);
         return encrypt;
     }
+
 
     public static String Xenocrypt(String msg, String keyw, int key) {
         String alph2 = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";  
