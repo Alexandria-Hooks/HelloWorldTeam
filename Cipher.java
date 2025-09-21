@@ -53,14 +53,12 @@ public class Cipher {
         return encrypt;
     }
 
-    public static String XenocryptCipher(String msg, String keyw, int key) {
-        String encrypt = "";
-        //spanish alphabet
-        String alph2 = "ABCDEFGHIJKLMÑOPQRSTUVWXYZ";
-  
+    public static String Xenocrypt(String msg, String keyw, int key) {
+        String alph2 = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";  
+        String encrypt = ""; 
         String aristAlph = keyw;    //alphabet with the key starting it
         String[] uniqChars = new String[keyw.length()]; //uniq chars in keyword
-        String temp = alph.substring(keyw.length()-1, 26);
+        String temp = alph2.substring(keyw.length()-1, 26);
         for (int i = 0; i < uniqChars.length; i++) {
             if (temp.contains(uniqChars[i])) {
                 temp = temp.replaceAll(uniqChars[i], "");
@@ -81,6 +79,8 @@ public class Cipher {
         return encrypt;
     }
 
+
+    
 
     public static String VigenereCipher(String message, String key, boolean encrypt){
         StringBuilder result = new StringBuilder();
