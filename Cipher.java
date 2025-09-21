@@ -29,7 +29,6 @@ public class Cipher {
 
     //untested hashtag i do not want to do this
     public static String Aristocrat(String msg, String keyw, int key) {
-        String alph = "ABCDEFGHIJKLMOPQRSTUVWXYZ";
         String encrypt = ""; 
         String aristAlph = keyw;    //alphabet with the key starting it
         String[] uniqChars = new String[keyw.length()]; //uniq chars in keyword
