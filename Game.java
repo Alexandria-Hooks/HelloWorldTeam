@@ -4,10 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /* Game User Interface Class
-*
-*  used in Driver to complete
-*  game loop
-*/
+ *
+ *  used in Driver to complete
+ *  game loop
+ */
 public class Game extends JFrame {
     private JPanel panel;
     private JLabel title;
@@ -32,38 +32,10 @@ public class Game extends JFrame {
         max_points = 100; // max possible points
         encryption = "";
         int key = keyGenerator();
-        switch (level) {  // figure out which cipher and obtain encryption
-            case 1: {
-                type = "Caesar";
-                encryption = Cipher.CaesarCipher(phrase, key); // TODO: use real phrase
-                break;
-            }
-            case 2: {
-                type = "Vigenere";
-                encryption = Cipher.VigenereCipher(phrase, "", true); // TODO: use real phrase
-                break;
-            }
-            case 3: {
-                type = "Aristocrat";
-                max_points = 500;
-                encryption = Cipher.Aristocrat(phrase, "Dove", key); // TODO: use real phrase
-                break;
-            }
-            case 4: {
-                type = "Porta";
-                max_points = 500;
-                // TODO: call Porta function from Cipher and assign to encryption
-                break;
-            }
-            default:
-                type = "Xenocrypt";
-                max_points = 1000;
-                encryption = Cipher.XenocryptCipher(phrase, "Dove", key); // TODO: use real phrase
-        }
         title = new JLabel(type + " Cipher");
         currentPoints = new JLabel("Points: " + points);
         currentAttempts = new JLabel("Attempts: " + attempts);
-        question = new JLabel("<html>Encrypted message: " + encryption + "<br>It is encoded using TODO</html>"); // TODO: obtain encryption from Cipher Class
+        question = new JLabel(phrase);
         prompt = new JLabel("Guess: ");
         guess = new JTextField(15);
 
@@ -143,3 +115,4 @@ public class Game extends JFrame {
         //System.out.println(getScore(100, 2));
     }*/
 }
+
