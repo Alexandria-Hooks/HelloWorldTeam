@@ -62,7 +62,7 @@ public class Cipher {
     }
 
 
-    public static String Xenocrypt(String msg, String keyw, int key) {
+    public static String XenocryptCipher(String msg, String keyw, int key) {
         String alph2 = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";  
         String encrypt = ""; 
         String aristAlph = keyw;    //alphabet with the key starting it
