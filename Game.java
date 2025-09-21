@@ -32,8 +32,8 @@ public class Game extends JFrame {
         points = inPoints;              // obtain current player points
         correctAttempts = inCorrect;    // obtain current player correct attempts
         // Initialize quotes and keywords
-        quotes = lists("C:\\Users\\secsa\\OneDrive\\Desktop\\Computer Science\\Purdue\\HelloWorld\\QuoteSheet.csv");          // initialize quote list
-        keywords = lists("C:\\Users\\secsa\\OneDrive\\Desktop\\Computer Science\\Purdue\\HelloWorld\\Keywords_Sheet1.csv");   // initialize keyword list
+        quotes = lists("YOUR PATH TO QuoteSheet.csv HERE");          // initialize quote list
+        keywords = lists("YOUR PATH TO Keywords_Sheet1.csv HERE");   // initialize keyword list
 
         setTitle("Anagrams - Level " +  level);
         setSize(900, 600);
@@ -48,14 +48,14 @@ public class Game extends JFrame {
         max_points = 100; // max possible points
         encryption = "";
         String keyw;
-        if (level == 1) { // for Xenocrypt Cipher
+        if (level == 4) { // for Xenocrypt Cipher
             phrase = quotes.get(randomGenerator(25,21)).toUpperCase();  // spanish quotes
             keyw = keywords.get(randomGenerator(25, 21)).toUpperCase(); // random spanish word
         } else {
             phrase = quotes.get(randomGenerator(20, 0)).toUpperCase();
             keyw = keywords.get(randomGenerator(20, 0)).toUpperCase();  // obtain random key word
         }
-        System.out.println("Encrypted Phrase: " + phrase); // TODO: comment out, for debugging
+        //System.out.println("Encrypted Phrase: " + phrase); // for debugging
         int key = randomGenerator(19, 1);
         String encryptionKey = ""; // stuff to use to solve encryption
         switch (level) {  // figure out which cipher and obtain encryption
@@ -124,12 +124,12 @@ public class Game extends JFrame {
                     question.setText("Decrypted message: " + phrase);
                     panel.remove(enter);
                     panel.remove(guess);
+                    if (level == 4) {
+                        // pop up msg
+                        JOptionPane.showMessageDialog(null, "You've completed the game with " + points + " points!");
+                        System.exit(0); // close UI
+                    }
                     if (correctAttempts == 5) {
-                        if (level == 4) {
-                            // pop up msg
-                            JOptionPane.showMessageDialog(null, "You've completed the game with " + points + " points!");
-                            dispose(); // close UI
-                        }
                         // Ask to raise level
                         int choice = JOptionPane.showConfirmDialog(null, "Would you like to move to the next level?");
                         if (choice == JOptionPane.YES_OPTION) {
@@ -206,9 +206,9 @@ public class Game extends JFrame {
         }
         return listed;
     }
-
+/*
     public static void main(String[] args) { // for debugging Game UI
-        new Game(2, 0, 4);
+        new Game(4, 0, 4);
         //System.out.println(getScore(100, 2));
-    }
+    }*/
 }
