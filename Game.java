@@ -29,13 +29,12 @@ public class Game extends JFrame {
     ArrayList<String> keywords;
     String phrase;
 
-    public Game(int level, double inPoints) { // Constructor
-        points = inPoints; // obtain current player points
+    public Game(int level, double inPoints, int inCorrect) { // Constructor
+        points = inPoints;              // obtain current player points
+        correctAttempts = inCorrect;    // obtain current player correct attempts
         // Initialize quotes and keywords
         quotes = lists("C:\\Users\\secsa\\OneDrive\\Desktop\\Computer Science\\Purdue\\HelloWorld\\QuoteSheet.csv");          // initialize quote list
         keywords = lists("C:\\Users\\secsa\\OneDrive\\Desktop\\Computer Science\\Purdue\\HelloWorld\\Keywords_Sheet1.csv");   // initialize keyword list
-
-
 
         setTitle("Anagrams - Level " +  level);
         setSize(800, 600);
@@ -116,7 +115,7 @@ public class Game extends JFrame {
                     question.setText("Decrypted message: " + phrase);
                     panel.remove(enter);
                     panel.remove(guess);
-                    if (correctAttempts == 10) {
+                    if (correctAttempts == 5) {
                         if (level == 4) {
                             // pop up msg
                             JOptionPane.showMessageDialog(null, "You've completed the game with " + points + " points!");
@@ -126,7 +125,7 @@ public class Game extends JFrame {
                         int choice = JOptionPane.showConfirmDialog(null, "Would you like to move to the next level?");
                         if (choice == JOptionPane.YES_OPTION) {
                             dispose();
-                            new Game(level + 1, points);
+                            new Game(level + 1, points, correctAttempts);
                         }
                         dispose(); // close UI
                     } else {
@@ -135,7 +134,7 @@ public class Game extends JFrame {
                         next.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                new Game(level, points);
+                                new Game(level, points, correctAttempts);
                             }
                         });
                         panel.add(next);
@@ -201,8 +200,7 @@ public class Game extends JFrame {
     }
 
     public static void main(String[] args) { // for debugging Game UI
-        new Game(4, 0);
-        //System.out.println(keyGenerator());
+        new Game(2, 0, 4);
         //System.out.println(getScore(100, 2));
     }
 }
