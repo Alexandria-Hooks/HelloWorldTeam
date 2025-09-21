@@ -9,8 +9,9 @@ public class Driver {
             if (!(level.equals("1") || level.equals("2") || level.equals("3") || level.equals("4"))) {
                 System.out.println("How are you going to do cryptography if you can't even read?");
             } else { // Game Loop
-                new Game(Integer.parseInt(level), 0);
+                new Game(Integer.parseInt(level), 0, 0);
             }
         });
     }
 }
+
