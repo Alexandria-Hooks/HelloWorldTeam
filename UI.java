@@ -23,12 +23,20 @@ public class UI extends JFrame {
         setSize(500,500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        panel.setBackground(new Color(177,156,215));
+        panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
+        panel.setBorder(BorderFactory.createEmptyBorder(20,40,20,40));
+
         panel = new JPanel(new FlowLayout());
 
         levelPrompt = new JLabel("Welcome to Anagrams!"); // temporarily welcome msg
+        levelPrompt.setFont(new Font("SansSerif", Font.BOLD, 20));
+        levelPrompt.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // enter button
         JButton enter = new JButton("Enter");
+        enter.setFont(new Font("SansSerif", Font.BOLD, 20));
+        enter.setAlignmentX(Component.CENTER_ALIGNMENT);
         enter.addActionListener(new ActionListener() {
             private boolean firstClick = true;
 
@@ -41,6 +49,7 @@ public class UI extends JFrame {
                             "Easy:<br>1. Caesar<br>2. Vigenere<br>" +
                             "Mid:<br>3. Aristocrat<br>4. Rail Fence<br>" +
                             "Hell:<br>5. Baconian</html>");
+                    levelPrompt.setFont(new Font("SansSerif", Font.BOLD, 15));
                     level = new JTextField(10); // to take user input
 
                     panel.add(levelPrompt);
