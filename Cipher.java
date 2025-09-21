@@ -69,7 +69,7 @@ public class Cipher {
 
     public static String XenocryptCipher(String msg, String keyw, int key) { // TODO: FIX
         StringBuilder encrypt = new StringBuilder();
-        static String spanishAlph = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
+        String spanishAlph = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
 
         String aristAlph = keyw;    // alphabet with the key starting it
         String[] uniqChars = new String[keyw.length()]; //uniq chars in keyword
