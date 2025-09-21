@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
 
 /* Game User Interface Class
 *
@@ -14,14 +13,15 @@ public class Game extends JFrame {
     private JLabel title;
     private String encryption;      // phrase to be solved
     private JLabel currentPoints;
-    private int points;
+    private double points;             // user's total points
+    private int max_points;         // total possible points from a question
     private JLabel currentAttempts;
     private int attempts;
     private JLabel question;
     private JLabel prompt;
     private JTextField guess;       // user guess
 
-    public Game(int level) { // Constructor
+    public Game(int level, String phrase) { // Constructor
         setTitle("Anagrams - Level " +  level);
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,32 +29,36 @@ public class Game extends JFrame {
         panel = new JPanel(new FlowLayout());
 
         String type = "";
+        max_points = 100; // max possible points
         encryption = "";
         int key = keyGenerator();
         switch (level) {  // figure out which cipher and obtain encryption
             case 1: {
                 type = "Caesar";
-                encryption = Cipher.CaesarCipher("DOVE IS BIRD", key); // TODO: use real phrase
+                encryption = Cipher.CaesarCipher(phrase, key); // TODO: use real phrase
                 break;
             }
             case 2: {
                 type = "Vigenere";
-                encryption = Cipher.VigenereCipher("Dove", "", true); // TODO: use real phrase
+                encryption = Cipher.VigenereCipher(phrase, "", true); // TODO: use real phrase
                 break;
             }
             case 3: {
                 type = "Aristocrat";
-                encryption = Cipher.Aristocrat("Dove", "Dove", key); // TODO: use real phrase
+                max_points = 500;
+                encryption = Cipher.Aristocrat(phrase, "Dove", key); // TODO: use real phrase
                 break;
             }
             case 4: {
                 type = "Porta";
+                max_points = 500;
                 // TODO: call Porta function from Cipher and assign to encryption
                 break;
             }
             default:
                 type = "Xenocrypt";
-                encryption = Cipher.XenocryptCipher("Dove", "Dove", key); // TODO: use real phrase
+                max_points = 1000;
+                encryption = Cipher.XenocryptCipher(phrase, "Dove", key); // TODO: use real phrase
         }
         title = new JLabel(type + " Cipher");
         currentPoints = new JLabel("Points: " + points);
@@ -71,11 +75,40 @@ public class Game extends JFrame {
                 attempts++; // add 1 attempt
                 String guessed = guess.getText().toUpperCase(); // take in user input
                 System.out.println("Guessed: " + guessed);
-                // TODO: compare to correct answer
-                if (guessed.equals(encryption)) {
 
+                // update panel parts that both if and else do
+                panel.removeAll();
+                currentAttempts = new JLabel("Attempts: " + attempts);
+                panel.add(title);
+                panel.add(title);
+                // compare to correct answer
+                if (guessed.equals(phrase)) {
+                    // obtain user points
+                    points += getScore(max_points, attempts);
+
+                    // pop up msg
+                    JOptionPane.showMessageDialog(null, "You guessed correctly!");
+
+                    // panel update
+                    currentPoints = new JLabel("Points: " + points);
+                    question = new JLabel("Encrypted message: " + phrase);
+                    panel.add(currentPoints);
+                    panel.add(currentAttempts);
+                    panel.add(question);
+                } else {
+                    // pop up msg
+                    JOptionPane.showMessageDialog(null, "Wrong! you're low-key chopped...");
+
+                    // panel update
+                    panel.add(currentPoints);
+                    panel.add(currentAttempts);
+                    panel.add(question);
+                    panel.add(guess);
+                    panel.add(enter);
                 }
-                // TODO: figure out how many points earned if correct
+                // panel update
+                panel.revalidate();
+                panel.repaint();
             }
         });
 
@@ -92,13 +125,21 @@ public class Game extends JFrame {
         setVisible(true);
     }
 
-    // Random Key Generator
+    // Random Key Generator (1 to 19)
     public static int keyGenerator() {
-        return new Random().nextInt(10);
+        return (int) (Math.random() * (18) + 1);
     }
 
-    public static void main(String[] args) { // for debugging Game UI
-        new Game(1);
-        //System.out.println(keyGenerator());
+    // Calculate points gained based on number of attempts
+    public static double getScore(int inPoint, int inAttempts) {
+        if (inAttempts == 1)
+            return inPoint;
+        return inPoint * Math.pow(0.9, (inAttempts - 1));
     }
+/*
+    public static void main(String[] args) { // for debugging Game UI
+        new Game(1, "DOVE IS BIRD");
+        //System.out.println(keyGenerator());
+        //System.out.println(getScore(100, 2));
+    }*/
 }
