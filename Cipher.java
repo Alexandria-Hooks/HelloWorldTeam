@@ -102,12 +102,7 @@ public class Cipher {
             if(alph.indexOf(ch) != -1){ //encrypt letters
                 chIndex = alph.indexOf(ch); //index of message letter
                 actualIndex = alph.indexOf(actualKey.charAt(i)); //index of key letter
-
-                if(encrypt){
-                    result1 = (chIndex + actualIndex) % 26; //encryption
-                } else{
-                    result1 = (chIndex - actualIndex + 26) % 26; //decryption
-            }
+                result1 = (chIndex + actualIndex) % 26; //encryption
                 result.append(alph.charAt(result1));
             } else{
                 result.append(ch); // leave non alphabetical characters unchanged
